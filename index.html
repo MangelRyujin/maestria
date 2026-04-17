@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imagen Personal Docente</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF9F6;
+    --surface: #FFFFFF;
+    --surface2: #F3F1EC;
+    --border: rgba(0,0,0,0.10);
+    --border-md: rgba(0,0,0,0.18);
+    --text: #1A1916;
+    --text-sec: #6B6860;
+    --text-muted: #9E9B93;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --purple-dark: #3C3489;
+    --teal: #0F6E56;
+    --teal-light: #E1F5EE;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --green: #3B6D11;
+    --green-light: #EAF3DE;
+    --blue: #185FA5;
+    --blue-light: #E6F1FB;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HERO HEADER */
+  .hero {
+    background: var(--text);
+    color: #FAF9F6;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+  }
+
+  /* NAV TABS */
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    padding: 1rem 0 0;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    flex-shrink: 0;
+    padding: 10px 20px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    position: relative;
+    bottom: -0.5px;
+  }
+  .nav-tab:hover { color: var(--text-sec); }
+  .nav-tab.active {
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
+  .nav-tab .tab-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    font-size: 10px; font-weight: 600;
+    background: var(--surface2);
+    margin-right: 6px;
+    color: var(--text-sec);
+  }
+  .nav-tab.active .tab-num {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeIn .3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+  }
+  .card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  /* FORM GRID */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+  .field {
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+  .field label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .field input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--border-md);
+    font-size: 14px;
+    color: var(--text);
+    padding: 4px 0;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color .2s;
+  }
+  .field input:focus { border-bottom-color: var(--purple); }
+  .field input::placeholder { color: var(--text-muted); }
+
+  /* PILARES */
+  .pilares-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .pilar-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 14px; border-radius: 30px;
+    border: 0.5px solid var(--border-md);
+    background: var(--surface2);
+    cursor: pointer; font-size: 13px;
+    color: var(--text-sec);
+    font-family: 'DM Sans', sans-serif;
+    transition: all .18s;
+  }
+  .pilar-btn:hover { border-color: var(--purple); color: var(--purple); }
+  .pilar-btn.sel {
+    background: var(--purple-light);
+    border-color: var(--purple);
+    color: var(--purple-dark);
+    font-weight: 500;
+  }
+  .pilar-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* BADGES */
+  .badge {
+    display: inline-block; font-size: 11px;
+    padding: 3px 10px; border-radius: 20px; font-weight: 500;
+  }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-purple { background: var(--purple-light); color: var(--purple-dark); }
+
+  /* SCENARIO CARDS */
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+  @media (max-width: 500px) { .scenario-grid { grid-template-columns: 1fr; } }
+  .scenario-card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    background: var(--surface);
+  }
+  .scenario-card:hover { border-color: var(--border-md); box-shadow: var(--shadow); }
+  .scenario-card.sel { border-color: var(--purple); border-width: 1.5px; }
+  .scenario-head {
+    padding: 10px 14px 8px;
+    background: var(--surface2);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .scenario-body { padding: 10px 14px 14px; font-size: 13px; color: var(--text-sec); line-height: 1.5; }
+
+  /* RESULTADO CASO */
+  .caso-result { display: none; }
+  .caso-result.show { display: block; }
+  .result-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;
+  }
+  @media (max-width: 500px) { .result-split { grid-template-columns: 1fr; } }
+  .result-col {
+    padding: 14px;
+    border-radius: var(--radius-sm);
+  }
+  .result-col.neg { background: var(--red-light); }
+  .result-col.pos { background: var(--green-light); }
+  .result-col h4 { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+  .result-col.neg h4 { color: var(--red); }
+  .result-col.pos h4 { color: var(--green); }
+  .result-col ul { padding-left: 16px; font-size: 12px; line-height: 1.9; color: var(--text-sec); }
+  .result-cons { font-size: 12px; margin-top: 8px; font-weight: 500; }
+  .result-cons.neg { color: var(--red); }
+  .result-cons.pos { color: var(--green); }
+  .reflexion-box {
+    margin-top: 12px; padding: 12px 16px;
+    background: var(--surface2); border-radius: var(--radius-sm);
+    font-size: 13px; color: var(--text-sec); line-height: 1.6;
+    border-left: 3px solid var(--purple);
+  }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 0.5px solid var(--border); margin: 1rem 0; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px 22px; border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border-md);
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .18s;
+    text-decoration: none;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-sec);
+  }
+  .btn-outline:hover { background: var(--surface2); color: var(--text); }
+  .btn-solid {
+    background: var(--text);
+    color: var(--bg);
+    border-color: transparent;
+  }
+  .btn-solid:hover { background: #333; }
+  .btn-full { width: 100%; }
+  .btn-group { display: flex; gap: 10px; margin-top: 1.5rem; }
+  .btn-group .btn { flex: 1; }
+
+  /* PROGRESS BARS */
+  .progress-wrap { margin-bottom: 14px; }
+  .progress-meta {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text-sec); margin-bottom: 5px;
+  }
+  .progress-track {
+    height: 5px; background: var(--surface2); border-radius: 3px; overflow: hidden; margin-bottom: 6px;
+  }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width .5s ease; }
+  input[type=range] {
+    width: 100%; accent-color: var(--purple); cursor: pointer;
+  }
+
+  /* TIMELINE */
+  .timeline { }
+  .tl-item { display: flex; gap: 12px; margin-bottom: 14px; }
+  .tl-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .tl-dot {
+    width: 11px; height: 11px; border-radius: 50%; margin-top: 3px; flex-shrink: 0;
+  }
+  .tl-line { width: 1px; background: var(--border); flex: 1; margin: 4px 0; min-height: 20px; }
+  .tl-content { font-size: 13px; color: var(--text-sec); line-height: 1.6; padding-top: 1px; }
+
+  /* MARCA CARD */
+  .marca-hero {
+    background: var(--text);
+    color: var(--bg);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .marca-eyebrow {
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 8px;
+  }
+  .marca-nombre {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem; font-weight: 400;
+    margin-bottom: 2px;
+  }
+  .marca-materia { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+  .marca-pilares-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .marca-pilar {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; border-radius: 20px; font-size: 12px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+  }
+  .marca-pilar-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+  .marca-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .marca-stat {
+    padding: 10px 12px; border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.07);
+  }
+  .marca-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+  .marca-stat-val { font-size: 14px; font-weight: 500; }
+  .marca-stat-val.pos { color: #9FE1CB; }
+  .marca-stat-val.warn { color: #FAC775; }
+
+  /* FRASE FINAL */
+  .frase-final {
+    border-left: 3px solid var(--purple);
+    padding: 14px 18px;
+    background: var(--purple-light);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-top: 1rem;
+  }
+  .frase-final p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px; line-height: 1.6;
+    color: var(--purple-dark);
+  }
+
+  /* FLUJO SVG */
+  .flujo-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); margin-bottom: 1rem; }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    text-align: center; font-size: 12px; color: var(--text-muted);
+    padding: 2rem 0 1rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eyebrow">Imagen Personal Docente</p>
+  <h1>Construye tu <em>marca</em><br>como docente</h1>
+  <p class="hero-sub">Un docente no se define por no equivocarse,<br>sino por cómo decide actuar en cada situación.</p>
+</div>
+
+<div class="container">
+
+  <div class="nav-wrap">
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showSection('inicio')"><span class="tab-num">1</span>Identidad</button>
+      <button class="nav-tab" onclick="showSection('casos')"><span class="tab-num">2</span>Casos de uso</button>
+      <button class="nav-tab" onclick="showSection('flujo')"><span class="tab-num">3</span>Flujo de decisión</button>
+      <button class="nav-tab" onclick="showSection('marca')"><span class="tab-num">4</span>Mi marca</button>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 1: IDENTIDAD ===== -->
+  <div id="s-inicio" class="section active">
+
+    <div class="card">
+      <p class="card-label">Tu punto de partida</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="id-quien">Nombre y rol</label>
+          <input type="text" id="id-quien" placeholder="Ej. María García, docente">
+        </div>
+        <div class="field">
+          <label for="id-materia">Materia y nivel</label>
+          <input type="text" id="id-materia" placeholder="Ej. Comunicación, Secundaria">
+        </div>
+        <div class="field">
+          <label for="id-fortaleza">Fortaleza principal</label>
+          <input type="text" id="id-fortaleza" placeholder="Ej. Empatía, claridad">
+        </div>
+        <div class="field">
+          <label for="id-mejora">Área a mejorar</label>
+          <input type="text" id="id-mejora" placeholder="Ej. Lenguaje corporal">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-label">Pilares de mi imagen docente</p>
+      <p style="font-size:13px; color:var(--text-sec); margin-bottom:14px; line-height:1.5;">Tu imagen está íntimamente relacionada con tu identidad. Selecciona los pilares que quieres construir:</p>
+      <div class="pilares-grid" id="pilares-grid">
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Comunicación verbal">
+          <span class="pilar-dot" style="background:var(--amber);"></span>Comunicación verbal
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Lenguaje no verbal">
+          <span class="pilar-dot" style="background:var(--amber);"></span>Lenguaje no verbal
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Conexión emocional">
+          <span class="pilar-dot" style="background:#D4537E;"></span>Conexión emocional
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Autoridad pedagógica">
+          <span class="pilar-dot" style="background:var(--red);"></span>Autoridad pedagógica
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Empatía">
+          <span class="pilar-dot" style="background:var(--green);"></span>Empatía
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Presencia digital">
+          <span class="pilar-dot" style="background:var(--blue);"></span>Presencia digital
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Adaptabilidad">
+          <span class="pilar-dot" style="background:var(--teal);"></span>Adaptabilidad
+        </button>
+        <button class="pilar-btn" onclick="togglePilar(this)" data-pilar="Autenticidad">
+          <span class="pilar-dot" style="background:var(--purple);"></span>Autenticidad
+        </button>
+      </div>
+      <p id="pilares-counter" style="font-size:12px; color:var(--text-muted); margin-top:12px;">0 pilares seleccionados</p>
+    </div>
+
+    <div class="card" style="background: var(--purple-light); border-color: rgba(83,74,183,0.15);">
+      <p style="font-size:13px; color:var(--purple-dark); line-height:1.6;">
+        <strong>Según Erving Goffman</strong>, el docente actúa en un escenario social constante. Tu imagen no es solo apariencia: es la percepción que construyes a través de tu actitud, comunicación y relación con los estudiantes.
+      </p>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-solid btn-full" onclick="showSection('casos')">Explorar casos de uso →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 2: CASOS DE USO ===== -->
+  <div id="s-casos" class="section">
+
+    <p style="font-size:14px; color:var(--text-sec); margin-bottom:1.25rem; line-height:1.6;">Selecciona un escenario real de aula. Analiza cómo reaccionarías y qué imagen construye cada respuesta.</p>
+
+    <div class="scenario-grid" id="casos-grid">
+      <div class="scenario-card" onclick="selectCaso(this,'celular')" data-caso="celular">
+        <div class="scenario-head"><span class="badge badge-amber">Distracción</span></div>
+        <div class="scenario-body">Un alumno está con el celular en medio de la clase</div>
+      </div>
+      <div class="scenario-card" onclick="selectCaso(this,'conflicto')" data-caso="conflicto">
+        <div class="scenario-head"><span class="badge badge-red">Conflicto</span></div>
+        <div class="scenario-body">Dos estudiantes discuten y el grupo pierde el hilo</div>
+      </div>
+      <div class="scenario-card" onclick="selectCaso(this,'desmotivado')" data-caso="desmotivado">
+        <div class="scenario-head"><span class="badge badge-blue">Motivación</span></div>
+        <div class="scenario-body">Un alumno dice: "esto no sirve para nada"</div>
+      </div>
+      <div class="scenario-card" onclick="selectCaso(this,'timido')" data-caso="timido">
+        <div class="scenario-head"><span class="badge badge-green">Participación</span></div>
+        <div class="scenario-body">Un alumno tímido nunca levanta la mano</div>
+      </div>
+    </div>
+
+    <div id="caso-resultado" class="caso-result">
+      <div class="card">
+        <p id="caso-titulo" style="font-size:14px; font-weight:600; margin-bottom:12px;"></p>
+        <div class="result-split">
+          <div class="result-col neg">
+            <h4>Respuesta negativa</h4>
+            <ul id="resp-neg"></ul>
+            <p class="result-cons neg" id="cons-neg"></p>
+          </div>
+          <div class="result-col pos">
+            <h4>Respuesta estratégica</h4>
+            <ul id="resp-pos"></ul>
+            <p class="result-cons pos" id="cons-pos"></p>
+          </div>
+        </div>
+        <div class="reflexion-box">
+          <p id="caso-reflexion" style="font-size:13px; color:var(--text-sec); line-height:1.6;"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="showSection('inicio')">← Identidad</button>
+      <button class="btn btn-solid" onclick="showSection('flujo')">Ver flujo de decisión →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 3: FLUJO DE DECISIÓN ===== -->
+  <div id="s-flujo" class="section">
+
+    <p style="font-size:14px; color:var(--text-sec); margin-bottom:1.25rem; line-height:1.6;">Mi imagen docente se construye en cada decisión consciente que tomo dentro y fuera del aula.</p>
+
+    <div class="flujo-wrap">
+      <svg width="100%" viewBox="0 0 640 530" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>Flujo de decisión docente</title>
+        <desc>Diagrama que muestra cómo el contexto del aula lleva a una decisión de actuación, con dos caminos: respuesta negativa o estratégica, y sus consecuencias en la marca docente.</desc>
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- CONTEXTO -->
+        <rect x="200" y="20" width="240" height="56" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#3C3489" x="320" y="43" text-anchor="middle" dominant-baseline="central">Contexto del aula</text>
+        <text font-family="DM Sans, sans-serif" font-size="12" fill="#534AB7" x="320" y="62" text-anchor="middle" dominant-baseline="central">Situación + tipo de estudiante</text>
+
+        <!-- flecha centro -->
+        <line x1="320" y1="76" x2="320" y2="114" stroke="#888780" stroke-width="1" marker-end="url(#ar)"/>
+
+        <!-- DECISIÓN -->
+        <rect x="195" y="114" width="250" height="56" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#633806" x="320" y="137" text-anchor="middle" dominant-baseline="central">Decisión de actuación</text>
+        <text font-family="DM Sans, sans-serif" font-size="12" fill="#854F0B" x="320" y="156" text-anchor="middle" dominant-baseline="central">Aquí vive tu marca docente</text>
+
+        <!-- flechas izq/der -->
+        <line x1="215" y1="168" x2="130" y2="216" stroke="#E24B4A" stroke-width="1.2" marker-end="url(#ar)"/>
+        <line x1="425" y1="168" x2="510" y2="216" stroke="#639922" stroke-width="1.2" marker-end="url(#ar)"/>
+
+        <!-- NEGATIVA -->
+        <rect x="20" y="216" width="215" height="56" rx="10" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="13" font-weight="500" fill="#501313" x="127" y="239" text-anchor="middle" dominant-baseline="central">Respuesta negativa</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#A32D2D" x="127" y="258" text-anchor="middle" dominant-baseline="central">Gritar · Ignorar · Ridiculizar</text>
+        <line x1="127" y1="272" x2="127" y2="314" stroke="#E24B4A" stroke-width="1" marker-end="url(#ar)"/>
+        <rect x="20" y="314" width="215" height="72" rx="10" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="13" font-weight="500" fill="#501313" x="127" y="337" text-anchor="middle" dominant-baseline="central">Consecuencias</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#791F1F" x="127" y="356" text-anchor="middle" dominant-baseline="central">Pierdes conexión emocional</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#791F1F" x="127" y="373" text-anchor="middle" dominant-baseline="central">Generas rechazo y distancia</text>
+
+        <!-- POSITIVA -->
+        <rect x="405" y="216" width="215" height="56" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="13" font-weight="500" fill="#173404" x="512" y="239" text-anchor="middle" dominant-baseline="central">Respuesta estratégica</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#3B6D11" x="512" y="258" text-anchor="middle" dominant-baseline="central">Redirigir · Límites · Conectar</text>
+        <line x1="512" y1="272" x2="512" y2="314" stroke="#639922" stroke-width="1" marker-end="url(#ar)"/>
+        <rect x="405" y="314" width="215" height="72" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="13" font-weight="500" fill="#173404" x="512" y="337" text-anchor="middle" dominant-baseline="central">Consecuencias</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#27500A" x="512" y="356" text-anchor="middle" dominant-baseline="central">Generas confianza y vínculo</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#27500A" x="512" y="373" text-anchor="middle" dominant-baseline="central">Aumenta la participación</text>
+
+        <!-- flechas al resultado -->
+        <line x1="127" y1="386" x2="210" y2="434" stroke="#888780" stroke-width="1" marker-end="url(#ar)"/>
+        <line x1="512" y1="386" x2="430" y2="434" stroke="#888780" stroke-width="1" marker-end="url(#ar)"/>
+
+        <!-- RESULTADO -->
+        <rect x="175" y="434" width="290" height="56" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+        <text font-family="DM Sans, sans-serif" font-size="14" font-weight="500" fill="#04342C" x="320" y="457" text-anchor="middle" dominant-baseline="central">Resultado: tu marca docente</text>
+        <text font-family="DM Sans, sans-serif" font-size="11" fill="#0F6E56" x="320" y="476" text-anchor="middle" dominant-baseline="central">Clima · Relación · Aprendizaje real</text>
+      </svg>
+    </div>
+
+    <div class="card">
+      <p class="card-label">La clave de tu propuesta</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--amber);"></div><div class="tl-line"></div></div>
+          <p class="tl-content">A veces serás más firme, y está bien. Eso construye <strong>autoridad pedagógica</strong>.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--green);"></div><div class="tl-line"></div></div>
+          <p class="tl-content">A veces serás más cercano. Eso construye <strong>confianza y vínculo</strong>.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red);"></div><div class="tl-line"></div></div>
+          <p class="tl-content">A veces fallarás. Eso también es parte de tu marca, si lo <strong>reconoces y aprendes</strong>.</p>
+        </div>
+        <div class="tl-item" style="margin-bottom:0;">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--teal);"></div></div>
+          <p class="tl-content">Lo que importa: eres <em>consciente</em> de tu impacto en cada momento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="showSection('casos')">← Casos</button>
+      <button class="btn btn-solid" onclick="showSection('marca'); buildMarca()">Ver mi marca →</button>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN 4: MI MARCA ===== -->
+  <div id="s-marca" class="section">
+
+    <div class="marca-hero" id="marca-hero">
+      <p class="marca-eyebrow">Mi identidad docente</p>
+      <p class="marca-nombre" id="marca-nombre">Tu nombre</p>
+      <p class="marca-materia" id="marca-materia">Tu área / nivel</p>
+      <div class="marca-pilares-wrap" id="marca-pilares"></div>
+      <div class="marca-grid">
+        <div class="marca-stat">
+          <div class="marca-stat-label">Fortaleza</div>
+          <div class="marca-stat-val pos" id="marca-fortaleza">—</div>
+        </div>
+        <div class="marca-stat">
+          <div class="marca-stat-label">En construcción</div>
+          <div class="marca-stat-val warn" id="marca-mejora">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-label">Autoevaluación de autenticidad</p>
+      <p style="font-size:13px; color:var(--text-sec); margin-bottom:1rem; line-height:1.5;">Mueve los sliders para reflejar tu situación actual. Esto es solo para ti.</p>
+
+      <div class="progress-wrap">
+        <div class="progress-meta"><span>Coherencia (discurso = acción)</span><span id="val-coh">70%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="bar-coh" style="width:70%; background:var(--teal);"></div></div>
+        <input type="range" min="0" max="100" value="70" oninput="updateBar('coh',this.value)">
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-meta"><span>Equilibrio autoridad / empatía</span><span id="val-eq">60%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="bar-eq" style="width:60%; background:var(--amber);"></div></div>
+        <input type="range" min="0" max="100" value="60" oninput="updateBar('eq',this.value)">
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-meta"><span>Conexión emocional con alumnos</span><span id="val-cn">55%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="bar-cn" style="width:55%; background:var(--blue);"></div></div>
+        <input type="range" min="0" max="100" value="55" oninput="updateBar('cn',this.value)">
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-meta"><span>Presencia digital responsable</span><span id="val-dg">50%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="bar-dg" style="width:50%; background:var(--purple);"></div></div>
+        <input type="range" min="0" max="100" value="50" oninput="updateBar('dg',this.value)">
+      </div>
+    </div>
+
+    <div class="frase-final">
+      <p>"No soy perfecto/a, soy consciente. Elijo cómo actuar en cada situación para generar aprendizaje real."</p>
+    </div>
+
+    <div class="btn-group" style="margin-top:1.5rem;">
+      <button class="btn btn-outline" onclick="showSection('flujo')">← Flujo</button>
+      <button class="btn btn-solid" onclick="showSection('inicio')">Volver al inicio</button>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Basado en Goffman (2026) · Marco Buen Desempeño Docente MINEDU · PISA 2022</p>
+</div>
+
+<script>
+const CASOS = {
+  celular: {
+    titulo: "Situación: alumno con celular en clase",
+    neg: ["Interrumpes la clase gritando","Lo expones frente al grupo","Le quitas el celular bruscamente"],
+    pos: ["Te acercas sin interrumpir al grupo","Rediriges con una pregunta directa al alumno","Estableces un acuerdo claro y con respeto"],
+    consNeg: "❌ Genera resentimiento y distancia emocional",
+    consPos: "✅ El alumno baja el celular y se siente respetado",
+    reflexion: "<strong>Reflexión:</strong> Tu respuesta aquí muestra si priorizas la relación o el control. La marca docente fuerte hace ambas cosas."
+  },
+  conflicto: {
+    titulo: "Situación: conflicto entre dos estudiantes",
+    neg: ["Gritas para que se callen","Ignoras el conflicto y sigues la clase","Castigas a ambos sin escuchar"],
+    pos: ["Pausas la clase con calma","Reconoces las emociones en juego","Retomas el hilo con participación del grupo"],
+    consNeg: "❌ El grupo percibe tu incomodidad ante el conflicto",
+    consPos: "✅ Usas el conflicto como oportunidad de aprendizaje",
+    reflexion: "<strong>Reflexión:</strong> Goffman diría: en ese momento, tu 'actuación' construye o destruye credibilidad frente al grupo."
+  },
+  desmotivado: {
+    titulo: "Situación: 'esto no sirve para nada'",
+    neg: ["Respondes con sarcasmo o ironía","Lo ignoras o cambias el tema","Lo reprendes frente a todos"],
+    pos: ["Validas la pregunta: '¿Por qué sí podría servir?'","Conectas el contenido con su realidad","Invitas al grupo a reflexionar juntos"],
+    consNeg: "❌ El alumno se cierra y arrastra a otros",
+    consPos: "✅ Conviertes la desmotivación en conversación significativa",
+    reflexion: "<strong>Reflexión:</strong> Tu imperfección puede ser tu herramienta: si alguna vez tú también dudaste del tema, dilo. Conecta."
+  },
+  timido: {
+    titulo: "Situación: alumno tímido que no participa",
+    neg: ["Lo llamas de sorpresa frente a todos","Lo ignoras porque 'al menos no molesta'","Haces comparaciones con otros"],
+    pos: ["Buscas un momento privado para conectar","Le das roles donde puede brillar sin exposición directa","Usas el trabajo en pares como puente"],
+    consNeg: "❌ Refuerzas su retraimiento y miedo al aula",
+    consPos: "✅ Construyes su confianza gradualmente",
+    reflexion: "<strong>Reflexión:</strong> Una imagen docente auténtica reconoce que no todos los alumnos necesitan lo mismo. Tu adaptación es tu marca."
+  }
+};
+
+let pilaresSeleccionados = [];
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  const map = {inicio:0, casos:1, flujo:2, marca:3};
+  if(map[id]!==undefined) document.querySelectorAll('.nav-tab')[map[id]].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function togglePilar(el) {
+  const pilar = el.dataset.pilar;
+  if(el.classList.contains('sel')) {
+    el.classList.remove('sel');
+    pilaresSeleccionados = pilaresSeleccionados.filter(p=>p!==pilar);
+  } else {
+    el.classList.add('sel');
+    pilaresSeleccionados.push(pilar);
+  }
+  document.getElementById('pilares-counter').textContent = pilaresSeleccionados.length + ' pilares seleccionados';
+}
+
+function selectCaso(el, caseKey) {
+  document.querySelectorAll('.scenario-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const c = CASOS[caseKey];
+  document.getElementById('caso-titulo').textContent = c.titulo;
+  document.getElementById('resp-neg').innerHTML = c.neg.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('resp-pos').innerHTML = c.pos.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('cons-neg').textContent = c.consNeg;
+  document.getElementById('cons-pos').textContent = c.consPos;
+  document.getElementById('caso-reflexion').innerHTML = c.reflexion;
+  const res = document.getElementById('caso-resultado');
+  res.classList.add('show');
+  res.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function buildMarca() {
+  const nombre = document.getElementById('id-quien').value.trim() || 'Docente';
+  const materia = document.getElementById('id-materia').value.trim() || 'Mi área';
+  const fortaleza = document.getElementById('id-fortaleza').value.trim() || 'Por descubrir';
+  const mejora = document.getElementById('id-mejora').value.trim() || 'En proceso';
+  document.getElementById('marca-nombre').textContent = nombre;
+  document.getElementById('marca-materia').textContent = materia;
+  document.getElementById('marca-fortaleza').textContent = fortaleza;
+  document.getElementById('marca-mejora').textContent = mejora;
+  const pilaresDiv = document.getElementById('marca-pilares');
+  if(pilaresSeleccionados.length > 0) {
+    pilaresDiv.innerHTML = pilaresSeleccionados.map(p =>
+      `<span class="marca-pilar"><span class="marca-pilar-dot"></span>${p}</span>`
+    ).join('');
+  } else {
+    pilaresDiv.innerHTML = '<span style="font-size:12px; color:rgba(255,255,255,0.4);">Selecciona tus pilares en la sección Identidad</span>';
+  }
+}
+
+function updateBar(key, val) {
+  document.getElementById('bar-'+key).style.width = val+'%';
+  document.getElementById('val-'+key).textContent = val+'%';
+}
+</script>
+</body>
+</html>
